@@ -84,8 +84,8 @@
     ctx.fillRect(0, 0, width, height);
     while( ballList.length < 25){
       var ball = new Ball(
-        random(0, width),
-        random(0, height),
+        random(20, width - 20),
+        random(20, height - 20),
         random(-5, 5),
         random(-5, 5),
         getRandomColor(),
@@ -97,14 +97,13 @@
     ballList.sort(function (a, b) {
       var dx = a.x - b.x;
       var dy = a.y - b.y;
-      var distance = Math.sqrt(dx * dx + dy * dy);
-      return distance;
+      return Math.sqrt(dx * dx + dy * dy);
     });
 
-    for( var i = 0 ; i < ballList.length; i++ ){
-      ballList[i].draw();
-      ballList[i].update();
-      ballList[i].collisionDetect(i+1);
+    for( var j = 0; j < ballList.length; j++ ){
+      ballList[j].collisionDetect(j+1);
+      ballList[j].update();
+      ballList[j].draw();
     }
 
     // run the loop method a set number of times per second to create a smooth animation
